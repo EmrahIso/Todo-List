@@ -1,62 +1,68 @@
+// Factories
+
 function TaskManagerCreator() {
     const taskManager = {};
 
     const getTaskManager = () => taskManager;
 
-    const dropProject = (project, projectName) => {
+    const addProject = (project, projectName) => {
         taskManager[projectName] = project;
     }
 
-    return { getTaskManager, dropProject }
+    const getProject = (name) => {
+        return taskManager[name];
+    }
+
+    const hasProject = (name) => {
+        return taskManager.hasOwnProperty(name);
+    }
+
+    return { getTaskManager, addProject, getProject, hasProject }
 }
 
-function TaskProjectCreator() {
-    const taskProject = [];
+function TaskProjectCreator(name) {
+    const taskProject = {};
 
     const getTaskProject = () => taskProject;
 
-    const dropTask = (task) => {
-        taskProject.push(task);
+    const addTask = (task) => {
+        taskProject[task.title] = task;
     }
 
-    return { getTaskProject, dropTask }
+    return { getTaskProject, addTask, name }
 }
 
-function TaskCreator(title, description, dueDate, priority, notes, checklist) {
+function TaskCreator(taskData) {
 
-    return { title, description, dueDate, priority, notes, checklist }
+    return { ...taskData }
 }
+
+// Functions
+
+function addProjectToManager(projectName) {
+    const project = TaskProjectCreator(projectName);
+    taskManagerControl.addProject(project, projectName);
+}
+
+function addTaskToProject(projectName, taskData) { 
+    const project = taskManagerControl.getProject(projectName);
+    const task = TaskCreator(taskData);
+    
+    project.addTask(task);
+}
+
+let activeProject = null;
+
+function getActiveProject() {
+    return activeProject;
+}
+
+function switchActiveProject(projectName) {
+    activeProject = taskManagerControl.getProject(projectName);
+}
+
+// Usage
 
 const taskManagerControl = TaskManagerCreator();
 
-const getTaskManagerControl = () => taskManagerControl;
-
-
-function addProjectToManager(projectName) {
-    const project = TaskProjectCreator();
-    taskManagerControl.dropProject(project, projectName);
-}
-
-function addTaskToProject(project) { 
-    const title = window.prompt("title");
-    const description = window.prompt("description");
-    const dueDate = window.prompt("dueDate");
-    const priority = window.prompt("priority");
-    const notes = window.prompt("notes"); // ...notes
-    const checklist = window.prompt("checklist");
-
-    const task = TaskCreator(title, description, dueDate, priority, notes, checklist);
-    project.dropTask(task);
-}
-
-
-function checkProjectAvailability(projectName) {
-    console.log(taskManagerControl.getTaskManager());
-    if(taskManagerControl.getTaskManager().hasOwnProperty(projectName)) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-export { getTaskManagerControl, addProjectToManager, addTaskToProject, checkProjectAvailability }
+export { taskManagerControl, addProjectToManager, addTaskToProject, getActiveProject, switchActiveProject }
