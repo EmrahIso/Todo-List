@@ -12,10 +12,16 @@
   "author": "Emrah Isovic",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.0",
+    "sass": "^1.79.4",
+    "style-loader": "^4.0.0",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0",
     "webpack-merge": "^6.0.1"
+  },
+  "dependencies": {
+    "sass-loader": "^16.0.2"
   }
 }
