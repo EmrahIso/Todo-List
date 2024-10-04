@@ -1,39 +1,57 @@
-import { getTaskManagerControl, addTaskToProject, addProjectToManager, checkProjectAvailability } from "./logic.js";
+import { getActiveProject } from "./logic.js";
 
-const TaskManagerDOMControl = (function() {
-    const addProjectBtnEl = document.querySelector("#projectBtn");
+function UIProjectButtonCreator(projectName) {
+    const contentProjectWrapperEl = document.querySelector("#contentProjectWrapper");
 
-    const addTaskBtnEl = document.querySelector("#taskBtn");
+    const projectButtonEl = document.createElement("button");
+    projectButtonEl.textContent  = projectName;
+    projectButtonEl.dataset.project = projectName;
+    contentProjectWrapperEl.appendChild(projectButtonEl);
+}
 
+function UITaskCreator(projectName, taskData) {
+    const contentEl = document.querySelector("#contentTaskWrapper");
 
-    const addProjectBtnClickEventHandler = (e) => {
-        const projectNameInputEl = document.querySelector("input#project");
-        const projectName = projectNameInputEl.value;
+    const contentBoxEl = document.createElement("div");
+    contentBoxEl.classList.add("contentBox");
+    contentBoxEl.dataset.projectId = projectName;
+    contentEl.appendChild(contentBoxEl);
 
-        if(!checkProjectAvailability(projectName)) {
-            return;
-        } else {
-            addProjectToManager(projectName);
-        }
+    const taskWrapperEl = document.createElement("div");
+    taskWrapperEl.classList.add("task");
+    contentBoxEl.appendChild(taskWrapperEl);
 
-    }
-    
-    const addTaskBtnClickEventHandler = (e) => {
-        const projectNameInputEl = document.querySelector("input#taskProject");
-        const projectName = projectNameInputEl.value;
+    const taskPropertiesList = ["title", "description", "due date", "priority", "notes", "checklist"];
 
-        const taskTitleInputEl = document.querySelector("input#task");
-        const taskTitle = taskTitleInputEl.value;
+    taskPropertiesList.forEach(property => {
+        const taskPropertyEl = document.createElement("div");
+        taskPropertyEl.classList.add("taskProperty");
 
-        addTaskToProject(getTaskManagerControl().getTaskManager()[projectName], taskTitle, "m", "r", "a", "h", "x");
-    }
-    
-    return {
-        addProjectBtnEl,
-        addTaskBtnEl,
-        addProjectBtnClickEventHandler,
-        addTaskBtnClickEventHandler
-    }
-})() 
+        taskWrapperEl.appendChild(taskPropertyEl);
 
-export { TaskManagerDOMControl }
+        const propertyTextArray = property.split("");
+        propertyTextArray.splice(0, 1, propertyTextArray[0].toUpperCase());
+
+        taskPropertyEl.textContent = `${propertyTextArray.join("")}: `;
+
+        const taskPropertyValueEl = document.createElement("span");
+        taskPropertyValueEl.classList.add("taskPropertyValue");
+        taskPropertyValueEl.textContent = taskData[property];
+        taskPropertyEl.appendChild(taskPropertyValueEl);
+    })
+}
+
+function UISwitchProjects() {
+    const activeProject = getActiveProject();
+
+    const contentEl = document.querySelector("#contentTaskWrapper");
+
+    // Hide board
+    contentEl.querySelectorAll('.contentBox').forEach(n => n.style.display = "none");
+
+    // Show active Project Tasks
+
+    contentEl.querySelectorAll(`[data-project-id = "${activeProject.name}"]`).forEach(n => n.style.display = "block");
+}
+
+export { UIProjectButtonCreator, UITaskCreator, UISwitchProjects }
