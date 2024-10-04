@@ -1,0 +1,34 @@
+@use "../utilities" as *;
+@use "../utilities/variables" as *;
+@use "../utilities/type-scale" as *;
+
+:root {
+
+    // Type-scale
+    
+    @each $screen-size, $font-size in $type-scale {
+        @if $screen-size != small {
+            & {
+                @each $size, $value in $font-size {
+                    --fs-#{$size}: #{$value};
+                }
+            }
+        } @else {
+            &.hydrated {
+                @include respond-to(small) {
+                    @each $size, $value in $font-size {
+                        --fs-#{$size}: #{$value};
+                    }
+                }   
+            }
+        }
+    }
+    
+
+    // Shadows
+    & {
+        @each $name, $value in $shadows {
+            --shw-#{$name}: #{$value};
+        }
+    }
+}
