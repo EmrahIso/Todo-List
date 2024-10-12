@@ -1,0 +1,167 @@
+@use "../utilities/" as *;
+
+
+.button {
+    display: inline-block;
+    padding: toRem(8) toRem(12);
+    width: 100%;
+
+    font-size: var(--fs-300);
+    letter-spacing: .75px;
+    border: 0;
+    font-weight: bold;
+    color: var(--clr-neutral-300);
+    background-color: transparent;
+    cursor: pointer;
+
+    &--navigation {
+        display: flex;
+        align-items: center;
+        gap: toRem(8);
+
+        background-color: transparent;
+        transition: all .2s ease-in;
+
+        &:hover,
+        &:active {
+            background-color: var(--clr-neutral-500);
+        }
+
+        &.selected {
+            background-color: var(--clr-neutral-405);
+        }
+
+        &-project {
+            padding: toRem(6) toRem(8);
+        }
+
+        &-delete {
+            width: fit-content;
+            margin-left: auto;
+            padding: toRem(8);
+
+            &:hover,
+            &:active {
+                background-color: var(--clr-neutral-600);
+            }
+        }
+
+        span {
+            pointer-events: none;
+        }
+    }
+
+    &--add-project,
+    &--add-task  {
+        padding: toRem(12);
+        background-color: var(--clr-grn-400);
+        color: var(--clr-neutral-500);
+
+        &--cancel {
+            background-color: var(--clr-rd-400);
+            color: var(--clr-neutral-300);
+        }
+    }
+
+    &--add-project__cont {
+        padding-top: toRem(24);
+        border-top: 1px solid var(--clr-neutral-405);
+    }
+
+    &--add-task__cont {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: toRem(16);
+    }
+
+    &--open-task-form {
+        position: relative;
+        width: toRem(52);
+        height: toRem(52);
+        border-radius: 50%;
+        background-color: var(--clr-grn-300);
+        box-shadow: var(--shw-mini-light-bottom);
+        transition: background-color .3s;
+
+        &__cont {
+            display: flex;
+            align-items: center;
+            gap: toRem(24);
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            height: toRem(28);
+            width: 2.5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: toRem(12);
+            background-color: var(--clr-neutral-600);
+            transition: all .175s ease-in;
+        }
+
+        &::before {
+            transform: translate(-50%, -50%);
+        }
+
+        &::after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        &:hover,
+        &:active {
+            background-color: var(--clr-neutral-500);
+
+
+            &::before,
+            &::after {
+                background-color: var(--clr-grn-300);
+            } 
+
+            &::before {
+                transform: translate(-50%, -50%) rotate(90deg);
+            }
+    
+            &::after {
+                transform: translate(-50%, -50%) rotate(180deg);
+            }
+        }
+    }
+
+    &--task-control {
+        width: fit-content;
+        transition: background-color .25s;
+        padding: toRem(6);
+
+        background-color: var(--clr-neutral-600);
+
+        &--delete {
+            background-color: var(--clr-rd-400);
+        }
+
+        & svg {
+            transition: fill .25s;
+            height: 28px;
+            width: 28px;
+        }
+
+        &:hover,
+        &:active {
+            background-color: transparent;
+
+            & svg {
+                fill: var(--clr-grn-400);
+            }
+        }
+    }
+
+    &__label {
+        color: var(--clr-neutral-400);
+        text-transform: uppercase;
+        letter-spacing: .25px;
+        font-size: var(--fs-200);
+    }
+}

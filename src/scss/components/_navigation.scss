@@ -1,0 +1,20 @@
+@use "../utilities/" as *;
+
+.navigation {
+
+
+    &__list {
+        display: flex;
+        gap: toRem(16);
+        flex-direction: column;
+
+        padding-top: toRem(24);
+        border-top: 1px solid var(--clr-neutral-405);
+
+        list-style: none;
+    }
+
+    .icon-navigation {
+        fill: var(--clr-neutral-200);
+    }
+}

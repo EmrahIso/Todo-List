@@ -4,13 +4,24 @@ html {
     overflow-x: hidden;
 }
 
+body {
+    background-color: var(--clr-neutral-700);
+    color: var(--clr-neutral-300);
+    padding: 2rem;
+}
+
+.container {
+    max-width: toRem(1170);
+    margin: 0 auto;
+}
+
 hr {
     background-color: transparent;
-    height: 120px;
+    height: toRem(120);
 }
   
 #contentTaskWrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: toRem(30);
 }

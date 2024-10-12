@@ -1,0 +1,15 @@
+@use "../utilities/" as *;
+
+.aside {
+    padding: toRem(16);
+
+    display: flex;
+    gap: toRem(24);
+    flex-direction: column;
+
+    background-color: var(--clr-neutral-600);
+
+    .icon-main {
+        fill: var(--clr-grn-400);
+    }
+}

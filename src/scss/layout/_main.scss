@@ -1,0 +1,12 @@
+@use "../utilities/" as *;
+
+.main {
+    margin-top: max(toRem(20), 5vh);
+    padding: toRem(16);
+
+    display: grid;
+    grid-template-columns: minmax(toRem(220), 1fr) 3fr;
+    
+    background-color: var(--clr-neutral-500);
+    box-shadow: var(--shw-light-bottom);
+}

@@ -1,0 +1,128 @@
+@use "../utilities" as *;
+
+.form {
+    padding: toRem(32) 0;
+    
+    &--add-project {
+        border-top: 1px solid var(--clr-neutral-405);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: toRem(8);
+
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+        transform: scaleY(.5);
+        height: 0;
+    }
+
+    &--add-task {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(toRem(320), 1fr));
+        gap: toRem(24);
+
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+        transform: scaleY(.75);
+        height: 0;
+    }
+
+    &__label {
+        margin-bottom: toRem(6);
+    }
+
+    &__input {
+        height: auto;
+        display: inline-block;
+        padding: toRem(8) toRem(12);
+
+        font-size: var(--fs-300);
+        background-color: var(--clr-neutral-500);
+        color: var(--clr-neutral-300);
+        border: 0;
+        box-shadow: var(--shw-mini-light-bottom);
+
+        &[type="date"] {
+            color-scheme: dark;
+            padding: toRem(7) toRem(12);
+            appearance: none;
+        }
+
+        &--add-project-cont {
+            grid-column: 1 / -1;
+        }
+
+        &--add-task {
+            box-shadow: none;
+            border-bottom: 1px solid var(--clr-neutral-405);
+        }
+
+        &--radio {
+            appearance: none;
+            height: toRem(22);
+            width: toRem(22);
+            position: relative;
+            background-color: transparent;
+            border: 2px solid var(--clr-grn-400);
+            border-radius: 50%;
+            cursor: pointer;
+
+            &::after {
+                content: "";
+                height: toRem(10);
+                width: toRem(10);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                border-radius: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                background-color: var(--clr-grn-400);
+                opacity: 0;
+                transition: all .3s;
+            }
+
+            &:checked::after {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+    }
+
+    &__textarea {
+        height: auto;
+        width: 100%;
+        display: inline-block;
+        padding: toRem(6) toRem(8);
+        background-color: transparent;
+        resize: none;
+        color: var(--clr-neutral-300);
+
+        &--add-task {
+            border: 1px solid var(--clr-neutral-405);
+        }
+    }
+
+
+    & fieldset {
+        border: 1px solid var(--clr-neutral-405);
+        padding: toRem(16);
+        display: flex;
+        flex-direction: column;
+        gap: toRem(8);
+
+        & > div {
+            display: flex;
+            align-items: center;
+            gap: toRem(12);
+        }
+
+        & legend {
+            color: var(--clr-neutral-300);
+        }
+    }
+
+    & > div {
+        margin-bottom: toRem(18);
+    }
+}

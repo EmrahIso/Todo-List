@@ -1,0 +1,77 @@
+@use "../utilities/" as *;
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 toRem(32) 0 toRem(32);
+    gap: toRem(16);
+
+    &:nth-child(odd) {
+        background-color: var(--clr-neutral-600);
+
+        button:not([data-task-btn-delete]) {
+            background-color: var(--clr-neutral-500);
+        }
+    }
+
+    &__board {
+
+        color: var(--clr-neutral-300);
+    }
+
+    &__cell {
+        font-family: var(--font-regular);
+        font-weight: 400;
+        color: var(--clr-neutral-300);
+        padding: toRem(32) toRem(10);
+        font-size: var(--fs-300);
+
+        &--flex-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        &--priority {
+            position: relative;
+
+            &::after {
+                font-size: var(--fs-400);
+                position: absolute;
+                width: toRem(32);
+                height: toRem(32);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: toRem(8);
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            &-high {
+                &::after {
+                    content: "H";
+                    background-color: var(--clr-rd-400);
+                }
+            }
+
+            &-mid {
+                &::after {
+                    content: "M";
+                    color: var(--clr-neutral-100);
+                    background-color: var(--clr-orn-400);
+                }
+            }
+
+            &-low {
+                &::after {
+                    content: "L";
+                    color: var(--clr-neutral-100);
+                    background-color: var(--clr-cyn-400);
+                }
+            }
+        }
+    }
+}

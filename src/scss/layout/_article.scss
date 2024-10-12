@@ -1,0 +1,13 @@
+@use "../utilities/" as *;
+
+.article {
+    padding: toRem(8) toRem(24) 0 toRem(32);
+
+    & > div:first-child {
+        display: grid;
+        grid-template-columns: 1fr toRem(160);
+        align-items: center;
+        padding-bottom: toRem(22);
+        border-bottom: 1px solid var(--clr-neutral-405);
+    }
+}
