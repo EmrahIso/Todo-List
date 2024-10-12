@@ -3,8 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ToDo List</title>
 </head>
 <body>
+    <div class="container">
+        <main class="main">
+            <aside class="aside">
+                <div class="flex-wrapper jc-sb ai-c">
+                    <h1 class="main-heading">T O D O</h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42"  class="icon-main" fill="#000000" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+                </div>
+                <nav class="navigation navigation--date">
+                    <ul class="navigation__list">
+                        <li class="navigation__list-item">
+                            <button type="button" class="button button--navigation">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256" class="icon-navigation"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,16V152h-28.7A15.86,15.86,0,0,0,168,156.69L148.69,176H107.31L88,156.69A15.86,15.86,0,0,0,76.69,152H48V48Zm0,160H48V168H76.69L96,187.31A15.86,15.86,0,0,0,107.31,192h41.38A15.86,15.86,0,0,0,160,187.31L179.31,168H208v40Z"></path></svg>
+                                <span>Inbox</span>
+                            </button>
+                        </li>
+                        <li class="navigation__list-item">
+                            <button type="button" class="button button--navigation">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256" class="icon-navigation"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-38.34-85.66a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L116,164.69l42.34-42.35A8,8,0,0,1,169.66,122.34Z"></path></svg>
+                                <span>Today</span>
+                            </button>
+                        </li>
+                        <li class="navigation__list-item">
+                            <button type="button" class="button button--navigation">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256" class="icon-navigation"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-68-76a12,12,0,1,1-12-12A12,12,0,0,1,140,132Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,184,132ZM96,172a12,12,0,1,1-12-12A12,12,0,0,1,96,172Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,140,172Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,184,172Z"></path></svg>
+                                <span>This week</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="navigation navigation--projects">
+                    <ul class="navigation__list" data-dynamic-projects-cont>
+                        <h3 class="tertiary-heading">Projects:</h3>
+                    </ul>
+                </nav>
+                <form action="#" class="form form--add-project" data-project-form>
+                    <div class="form__input--add-project-cont">
+                        <input type="text" class="form__input form__input--add-project" data-input-project-name aria-label="project name" minlength="3" maxlength="10" placeholder="Enter project's name" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="button button--add-project" data-project-add-btn>Add</button>
+                    </div>
+                    <div>
+                        <button type="button" class="button button--add-project button--add-project--cancel" data-project-cancel-btn>Cancel</button>
+                    </div>
+                </form>
+                <div class="button--add-project__cont">
+                    <button type="button" class="button button--add-project" data-open-project-form>Add Project</button>
+                </div>
+            </aside>
+            <article class="article">
+                <div>
+                    <h2 class="secondary-heading secondary-heading--article">
+                        <span>//</span>
+                        <span data-active-project-heading>Routine</span>
+                    </h2>
+                    <div class="button--open-task-form__cont">
+                        <span class="button__label">Add Task</span>
+                        <button class="button button--open-task-form" data-open-task-form></button>
+                    </div>
+                </div>
+                <div id="article-content">
+                    <form action="#" class="form form--add-task" data-task-form>
+                        <div class="form__input--add-task-cont">
+                            <label for="task-input-title" class="form__label">Title: <span aria-label="This field is required"><strong>*</strong></span></label>
+                            <input type="text" id="task-input-title" class="form__input form__input--add-task" data-input-task-title aria-label="task title" minlength="3" maxlength="12" placeholder="e.g. Gym" required>
+                        </div>
+                        <div class="form__input--add-task-cont">
+                            <label for="task-input-date" class="form__label">Due Date: <span aria-label="This field is required"><strong>*</strong></span></label>
+                            <input type="date" id="task-input-date" class="form__input form__input--add-task" data-input-task-date aria-label="task due date" required>
+                        </div>
+                        <div class="form__input--add-task-cont">
+                            <label for="task-desc" class="form__label">Description:</label>
+                            <textarea id="task-desc" class="form__textarea form__textarea--add-task" data-textarea-task-desc aria-label="task description"
+                            cols="30" rows="3" minlength="3" maxlength="80" placeholder="e.g. Some random words"></textarea>
+                        </div>
+                        <div class="form__input--add-task-cont">
+                            <label for="task-notes" class="form__label">Notes:</label>
+                            <textarea id="task-notes" class="form__textarea form__textarea--add-task" data-textarea-task-notes aria-label="task notes"
+                            cols="30" rows="3" minlength="3" maxlength="80" placeholder="e.g. Your notes" ></textarea>
+                        </div>
+                        <div>
+                            <fieldset>
+                                <legend aria-label="choose task priority">Choose Priority: <span aria-label="This field is required"><strong>*</strong></span></legend>
+                                <div>
+                                  <input type="radio" class="form__input--radio" name="priority" id="priority-low" value="low" data-radio-task-priority aria-label="priority low" required>
+                                  <label for="priority-low">Low</label>
+                                </div>
+                                <div>
+                                  <input type="radio" class="form__input--radio" name="priority" id="priority-mid" value="mid" data-radio-task-priority aria-label="priority mid" required>
+                                  <label for="priority-mid">Mid</label>
+                                </div>   
+                                <div>
+                                  <input type="radio" class="form__input--radio" name="priority" id="priority-high" value="high" data-radio-task-priority aria-label="priority high" required>
+                                  <label for="priority-high">High</label>
+                                </div>
+                              </fieldset>
+                        </div>
+                        <div class="button--add-task__cont">
+                            <button type="button" class="button button--add-task button--add-task--cancel" data-task-cancel-btn>Cancel</button>
+                            <button type="submit" class="button button--add-task" data-task-add-btn>Add</button>
+                        </div>
+                    </form>
+                    <div class="task__board" data-tasks-content>          
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
 </body>
 </html>
