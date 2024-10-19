@@ -1,6 +1,18 @@
+// CSS import 
 import "../scss/main.scss"; 
-import { addProjectToManager, switchActiveProject, addTaskToProject } from "./modules/logic.js";
-import { UIProjectCreator, UISwitchProjects, UITaskCreator } from "./modules/UI";
+
+// Logic imports
+
+import { addProjectToManager, getTaskManagerControl } from "./modules/logic/TaskManager.js";
+import { getActiveProject, switchActiveProject, addTaskToProject } from "./modules/logic/project.js";
+
+// UI imports
+
+import { UIRenderProjects, UISwitchProjects } from "./modules/UI/UIProject.js";
+import { UIRenderTasks } from "./modules/UI/UITask.js";
+
+// Listeners import
+
 import "./modules/listeners.js";
 
 
@@ -9,12 +21,21 @@ if (process.env.NODE_ENV !== 'production') {
     console.log('Looks like we are in development mode!');
 }
 
+///////////////////////////////////
+// INITIAL RENDER
+///////////////////////////////////
+
 // Add Default Project 
-UIProjectCreator("Routine");
 addProjectToManager("Routine");
 
+// Render available projects
+
+UIRenderProjects(getTaskManagerControl().getTaskManager());
+
+// Switch active project to "Routine" project both logically and visually
+
 switchActiveProject("Routine");
-UISwitchProjects();
+UISwitchProjects(getActiveProject());
 
 
 // Add Default Tasks to Routine Project
@@ -25,6 +46,9 @@ const day = date.getDate();
 const month = date.getMonth();
 const year = date.getFullYear();
 
+
+// BrushYourTeth task Data
+
 const brushYourTeethTaskData = {
     title: "Brush Teeth",
     description: "",
@@ -34,30 +58,50 @@ const brushYourTeethTaskData = {
     checklist: false,
 }
 
+// Add BrushYourTeth Task to Routine Project
+
 addTaskToProject("Routine", brushYourTeethTaskData);
-UITaskCreator("Routine", brushYourTeethTaskData);
+
+// Render available tasks of "Routine" Project (update board)
+
+UIRenderTasks("Routine", getActiveProject().getTaskProject());
+
+
+// GoOutside task Data
 
 const goOutsideTaskData = {
     title: "Go outside",
     description: "Touch grass",
     ["due date"]: `${year}-${month}-${day}`,
-    priority: "high",
+    priority: "mid",
     notes: "Talk to someone, walk by the river",
     checklist: true,
 }
 
-addTaskToProject("Routine", goOutsideTaskData);
-UITaskCreator("Routine", goOutsideTaskData);
+// Add GoOutside Task to Routine Project
 
+addTaskToProject("Routine", goOutsideTaskData);
+
+// Render available tasks of "Routine" Project (update board)
+
+UIRenderTasks("Routine", getActiveProject().getTaskProject());
+
+
+// Workout task Data
 
 const workoutTaskData = {
     title: "Workout",
     description: "Chest, Shoulders, Triceps",
     ["due date"]: `${year}-${month}-${day}`,
-    priority: "mid",
+    priority: "low",
     notes: "bench, dips, push ups, lateral raises",
     checklist: false,
 }
 
+// Add Workout Task to Routine Project
+
 addTaskToProject("Routine", workoutTaskData);
-UITaskCreator("Routine", workoutTaskData);
+
+// Render available tasks of "Routine" Project (update board)
+
+UIRenderTasks("Routine", getActiveProject().getTaskProject());
