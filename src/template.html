@@ -35,7 +35,7 @@
                         </li>
                     </ul>
                 </nav>
-                <nav class="navigation navigation--projects">
+                <nav class="navigation navigation--projects" data-nav-projects>
                     <ul class="navigation__list" data-dynamic-projects-cont>
                         <h3 class="tertiary-heading">Projects:</h3>
                     </ul>
@@ -108,11 +108,51 @@
                             <button type="submit" class="button button--add-task" data-task-add-btn>Add</button>
                         </div>
                     </form>
-                    <div class="task__board" data-tasks-content>          
+                    <div class="task__board" data-tasks-content>           
                     </div>
+                    <dialog data-modal-task-dialog class="dialog">
+                        <h2 class="secondary-heading dialog__heading" data-dialog-task-name="task title">// Task Title</h2>
+                        <form action="#" class="form form--dialog" data-task-dialog-form>
+                            <div class="form--dialog__content-box">
+                                <div data-task-dialog-property="title">
+                                    <label class="form__label" data-task-dialog-property-name for="dialogTaskTitle">Title: </label>
+                                    <input type="text" id="dialogTaskTitle" aria-label="dialog task title" minlength="3" maxlength="12" class="form__input form__input--dialog" data-task-dialog-property-value required>
+                                </div>
+                                <div data-task-dialog-property="description">
+                                    <label class="form__label" data-task-dialog-property-name for="dialogTaskDescription">Description: </label>
+                                    <textarea class="form__textarea form__textarea--dialog" id="dialogTaskDescription" aria-label="dialog task description" cols="30" rows="3" minlength="3" maxlength="80" data-task-dialog-property-value></textarea>
+                                </div>
+                                <div data-task-dialog-property="due date" data-task-form="dialogTaskDate">
+                                    <label class="form__label" data-task-dialog-property-name for="dialogTaskDate">Due Date: </label>
+                                    <input type="date" id="dialogTaskDate" aria-label="dialog task date" class="form__input form__input--dialog" data-task-dialog-property-value required>
+                                </div>
+                                <div data-task-dialog-property="priority">
+                                    <label class="form__label" data-task-dialog-property-name for="dialogTaskPriority">Priority: </label>
+                                    <select class="form__select form__select--dialog" name="priority" id="dialogTaskPriority" data-task-dialog-property-value required>
+                                        <option value="low" aria-label="priority low">Low</option>
+                                        <option value="mid" aria-label="priority mid">Mid</option>
+                                        <option value="high" aria-label="priority high">High</option>
+                                    </select>
+                                </div>
+                                <div data-task-dialog-property="notes">
+                                    <label class="form__label" data-task-dialog-property-name for="dialogTaskNotes">Notes: </label>
+                                    <textarea class="form__textarea form__textarea--dialog" aria-label="dialog task notes" id="dialogTaskNotes" cols="30" rows="3" minlength="3" maxlength="80" data-task-dialog-property-value></textarea>
+                                </div>
+                                <div data-task-dialog-property="checklist">
+                                    <label class="form__label" data-task-dialog-property-name for="dialogTaskChecklist">Done: </label>
+                                    <input type="checkbox" id="dialogTaskChecklist" aria-label="dialog task done checkbox" class="form__input--checkbox" data-task-dialog-property-value>
+                                </div>
+                            </div>
+                            <div class="form--dialog__buttons-box">
+                                <button type="submit" class="button button--details button--details--edit" data-task-dialog-save>Save</button>
+                                <button type="button" class="button button--details button--details--close" data-task-dialog-close>Close</button>
+                            </div>
+                        </form>
+                    </dialog> 
                 </div>
             </article>
         </main>
     </div>
 </body>
 </html>
+
