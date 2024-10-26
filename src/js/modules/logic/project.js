@@ -16,6 +16,13 @@ function TaskProjectCreator(name) {
         return taskProject[taskName];
     }
 
+    const changeTaskKey = (oldKeyValue, newKeyValue) => {
+
+        Object.defineProperty(taskProject, newKeyValue, Object.getOwnPropertyDescriptor(taskProject, oldKeyValue));
+
+        if(oldKeyValue != newKeyValue) delete taskProject[oldKeyValue];
+    }
+
     const removeTask = (taskName) => {
         const taskProjectTasks = Object.keys(taskProject);
 
@@ -26,7 +33,7 @@ function TaskProjectCreator(name) {
         })
     }
 
-    return { getTaskProject, addTask, name, getTask, removeTask }
+    return { getTaskProject, addTask, name, getTask, removeTask, changeTaskKey }
 }
 
 /////////////////////////////////////////////

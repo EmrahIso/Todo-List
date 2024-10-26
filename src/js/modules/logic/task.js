@@ -7,28 +7,71 @@ function TaskCreator(taskData) {
 
     const taskObj =  { ...taskData };
 
-    const changeCheckList = () => {
-        if(taskObj.checklist) {
-            taskObj.checklist = false;
-        } else {
-            taskObj.checklist = true;
-        }
+    const changeTitle = (newValue) => {
+        taskObj.title = newValue;
     }
 
-    return { taskObj, changeCheckList }
+    const changeDescription = (newValue) => {
+        taskObj.description = newValue;
+    }
+
+    const changeDueDate = (newValue) => {
+        taskObj["due date"] = newValue;
+    }
+
+    const changePriority = (newValue) => {
+        taskObj.priority = newValue;
+    }
+
+    const changeNotes = (newValue) => {
+        taskObj.notes = newValue;
+    }
+
+    // Checklist type must be Boolean 
+
+    const changeCheckList = (newValue) => {
+        taskObj.checklist = newValue;
+    }
+
+    return { taskObj, changeTitle, changeDescription, changeDueDate, changePriority, changeNotes, changeCheckList }
 }
 
 /////////////////////////////////////////////
 
 // Functions that control the properties of the task object
 
-function switchTaskChecklist(taskName) {
+function switchTaskChecklist(taskName, newValue) {
     const targetTask = getActiveProject().getTask(taskName);
-    targetTask.changeCheckList();
+    targetTask.changeCheckList(newValue);
 }
 
 function removeTaskFromProject(projectName, taskName) {
     getTaskManagerControl().getProject(projectName).removeTask(taskName);
 }
 
-export { TaskCreator, switchTaskChecklist, removeTaskFromProject }
+function getPropertiesOfSpecificProjectsTask(projectName, taskName) { 
+    const project = getTaskManagerControl().getProject(projectName);
+    const task = project.getTask(taskName);
+
+    return { ...task.taskObj }
+} 
+
+// Function that that runs when edited task details are submitted (update value of every task property)
+
+function updatePropertiesOfSpecificProjectsTask(projectName, taskName, newTaskData) { 
+    const project = getTaskManagerControl().getProject(projectName);
+
+    console.log("newChecklistValue", newTaskData.checklist);
+
+    const task = project.getTask(taskName);
+
+    // Run all update methods 
+    task.changeTitle(newTaskData.title);
+    task.changeDescription(newTaskData.description);
+    task.changeDueDate(newTaskData["due date"]);
+    task.changePriority(newTaskData.priority);
+    task.changeNotes(newTaskData.notes);
+    task.changeCheckList(newTaskData.checklist);
+}
+
+export { TaskCreator, switchTaskChecklist, removeTaskFromProject, getPropertiesOfSpecificProjectsTask, updatePropertiesOfSpecificProjectsTask }
