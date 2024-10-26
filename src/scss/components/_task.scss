@@ -10,13 +10,12 @@
     &:nth-child(odd) {
         background-color: var(--clr-neutral-600);
 
-        button:not([data-task-btn-delete]) {
+        .task__task-cell > button:not([data-task-btn-delete]) {
             background-color: var(--clr-neutral-500);
         }
     }
 
     &__board {
-
         color: var(--clr-neutral-300);
     }
 
@@ -73,5 +72,10 @@
                 }
             }
         }
+    }
+
+    &[disabled] &__cell {
+        filter: brightness(.6);
+        text-decoration: line-through;
     }
 }

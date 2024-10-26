@@ -28,8 +28,39 @@
         height: 0;
     }
 
+    &--dialog {
+        display: flex;
+        flex-direction: column;
+        gap: toRem(36);
+        padding: toRem(48) 0 0 0;
+
+        &__content-box {
+            display: flex;
+            flex-direction: column;
+            gap: toRem(24);
+
+            & > div {
+                display: grid;
+                grid-template-columns: 3fr 7fr;
+                align-items: center;
+                gap: toRem(32);
+    
+                & label {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+        }
+
+        &__buttons-box {
+            display: flex;
+            gap: toRem(16);
+        }
+    }
+
     &__label {
         margin-bottom: toRem(6);
+        color: var(--clr-neutral-300);
     }
 
     &__input {
@@ -87,6 +118,46 @@
                 opacity: 1;
             }
         }
+
+        &--dialog {
+            border: 1px solid var(--clr-neutral-475);
+        }
+
+        &--checkbox {
+            appearance: none;
+            height: toRem(18);
+            width: toRem(18);
+            position: relative;
+            background-color: transparent;
+            border: 2px solid var(--clr-neutral-400);
+            cursor: pointer;
+
+            &::after {
+                content: "\2713";
+                pointer-events: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                height: toRem(10);
+                color: var(--clr-neutral-400);
+                width: toRem(10);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+                transition: all .3s;
+            }
+
+            &:checked {
+                border-color: var(--clr-neutral-400);
+
+                &::after {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 1;
+                }
+            }
+        }
     }
 
     &__textarea {
@@ -98,11 +169,27 @@
         resize: none;
         color: var(--clr-neutral-300);
 
+        &--dialog {
+            border: 1px solid var(--clr-neutral-475);
+        }
+
         &--add-task {
             border: 1px solid var(--clr-neutral-405);
         }
     }
 
+    &__select {
+        background-color: transparent;
+        color: var(--clr-neutral-300);
+
+        &--dialog {
+            border: 1px solid var(--clr-neutral-475);
+        }
+
+        option {
+            color: var(--clr-neutral-500);
+        }
+    }
 
     & fieldset {
         border: 1px solid var(--clr-neutral-405);
@@ -120,9 +207,5 @@
         & legend {
             color: var(--clr-neutral-300);
         }
-    }
-
-    & > div {
-        margin-bottom: toRem(18);
     }
 }

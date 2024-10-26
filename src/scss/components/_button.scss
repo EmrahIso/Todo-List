@@ -158,6 +158,18 @@
         }
     }
 
+    &--details {
+
+        &--edit {
+            background-color: var(--clr-grn-400);
+            color: var(--clr-neutral-500);
+        }
+
+        &--close {
+            background-color: var(--clr-rd-400);
+        }
+    }
+
     &__label {
         color: var(--clr-neutral-400);
         text-transform: uppercase;

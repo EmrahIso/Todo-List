@@ -25,3 +25,7 @@ hr {
     flex-wrap: wrap;
     gap: toRem(30);
 }
+
+img {
+    pointer-events: none;
+}

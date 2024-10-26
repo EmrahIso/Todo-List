@@ -1,0 +1,25 @@
+@use "../utilities/" as *;
+
+.dialog {
+    top: 50%;
+    left: 50%;
+    width: toRem(480);
+    transform: translate(-50%, -50%);
+    padding: toRem(32);
+    border: 0;
+    z-index: 9;
+    background-color: var(--clr-neutral-500);
+    box-shadow: var(--shw-light-bottom);
+
+    &__heading {
+        color: var(--clr-neutral-300);
+    }
+
+    & > div:first-child,
+    & > div:last-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: toRem(32);
+    }
+}
