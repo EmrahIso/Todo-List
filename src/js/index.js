@@ -42,9 +42,43 @@ UISwitchProjects(getActiveProject());
 
 const date = new Date();
 
+// DAY
 const day = date.getDate();
-const month = date.getMonth();
+
+// MONTH
+// date.getMonth will return numbers like (1, 5, 10, 11). We need 2 decimals like (01, 05, 10, 11) 
+
+const returnedMonth = String(date.getMonth());
+
+const monthArray = Array.from(returnedMonth);
+
+if( monthArray.length < 2 ) {
+    monthArray.unshift("0");
+} 
+
+const month = monthArray.join("");
+
+// YEAR
 const year = date.getFullYear();
+
+// GoOutside task Data
+
+const goOutsideTaskData = {
+    title: "Go outside",
+    description: "Touch grass",
+    ["due date"]: `${year}-${month}-${day}`,
+    priority: "mid",
+    notes: "Talk to someone, walk by the river",
+    checklist: false,
+}
+
+// Add GoOutside Task to Routine Project
+
+addTaskToProject("Routine", goOutsideTaskData);
+
+// Render available tasks of "Routine" Project (update board)
+
+UIRenderTasks("Routine", getActiveProject().getTaskProject());
 
 
 // BrushYourTeth task Data
@@ -55,32 +89,12 @@ const brushYourTeethTaskData = {
     ["due date"]: `${year}-${month}-${day}`,
     priority: "high",
     notes: "",
-    checklist: false,
+    checklist: true,
 }
 
 // Add BrushYourTeth Task to Routine Project
 
 addTaskToProject("Routine", brushYourTeethTaskData);
-
-// Render available tasks of "Routine" Project (update board)
-
-UIRenderTasks("Routine", getActiveProject().getTaskProject());
-
-
-// GoOutside task Data
-
-const goOutsideTaskData = {
-    title: "Go outside",
-    description: "Touch grass",
-    ["due date"]: `${year}-${month}-${day}`,
-    priority: "mid",
-    notes: "Talk to someone, walk by the river",
-    checklist: true,
-}
-
-// Add GoOutside Task to Routine Project
-
-addTaskToProject("Routine", goOutsideTaskData);
 
 // Render available tasks of "Routine" Project (update board)
 

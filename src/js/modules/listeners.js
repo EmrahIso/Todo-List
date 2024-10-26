@@ -1,4 +1,6 @@
-import { TaskManagerDOMControl } from "./DOMmanipulation.js";
+import { DOMProject } from "./Handlers/DOMproject.js";
+import { DOMTask } from "./Handlers/DOMtask.js";
+import { DOMTaskDialog } from "./Handlers/DOMtaskDialog.js";
 
 ///////////////
 // For Projects
@@ -6,23 +8,23 @@ import { TaskManagerDOMControl } from "./DOMmanipulation.js";
 
 // Open project Form (we need this form to add project)
 
-TaskManagerDOMControl.openProjectFormBtnEl.addEventListener("click", TaskManagerDOMControl.openProjectFormBtnClickEventHandler);
+DOMProject.openProjectFormBtnEl.addEventListener("click", DOMProject.openProjectFormBtnClickEventHandler);
 
 // Add project
 
-TaskManagerDOMControl.addProjectFormEl.addEventListener("submit", TaskManagerDOMControl.addProjectFormSubmitEventHandler);
+DOMProject.addProjectFormEl.addEventListener("submit", DOMProject.addProjectFormSubmitEventHandler);
 
 // Cancel project (and close project form)
 
-TaskManagerDOMControl.cancelProjectBtnEl.addEventListener("click", TaskManagerDOMControl.cancelProjectBtnClickEventHandler);
+DOMProject.cancelProjectBtnEl.addEventListener("click", DOMProject.cancelProjectBtnClickEventHandler);
 
 // Remove Project
 
-TaskManagerDOMControl.removeProjectListEl.addEventListener("click", TaskManagerDOMControl.removeProjectBtnClickEventHandler);
+DOMProject.removeProjectListEl.addEventListener("click", DOMProject.removeProjectBtnClickEventHandler);
 
 // Show tasks of active project
 
-TaskManagerDOMControl.projectButtonsContEl.addEventListener("click", TaskManagerDOMControl.switchActiveProjectsContClickEventHandler);
+DOMProject.projectButtonsContEl.addEventListener("click", DOMProject.switchActiveProjectsContClickEventHandler);
 
 ////////////
 // For Tasks
@@ -30,19 +32,19 @@ TaskManagerDOMControl.projectButtonsContEl.addEventListener("click", TaskManager
 
 // Open task Form (we need this form to add task and to gather data)
 
-TaskManagerDOMControl.openTaskFormBtnEl.addEventListener("click", TaskManagerDOMControl.openTaskFormBtnClickEventHandler);
+DOMTask.openTaskFormBtnEl.addEventListener("click", DOMTask.openTaskFormBtnClickEventHandler);
 
 // Close task Form
 
-TaskManagerDOMControl.closeTaskFormBtnEl.addEventListener("click", TaskManagerDOMControl.closeTaskFormBtnClickEventHandler);
+DOMTask.closeTaskFormBtnEl.addEventListener("click", DOMTask.closeTaskFormBtnClickEventHandler);
 
 // Add task to active project
 
-TaskManagerDOMControl.addTaskFormEl.addEventListener("submit", TaskManagerDOMControl.addTaskFormSubmitEventHandler);
+DOMTask.addTaskFormEl.addEventListener("submit", DOMTask.addTaskFormSubmitEventHandler);
 
 /////////////////////////
+
 // Task control listeners
-/////////////////////////
 
 // We use this listener when user clicks at any button that control task behavior (e.g. deleteTaskBtn, editTaskBtn, detailsTaskBtn, checklist ...)
 
@@ -52,18 +54,53 @@ TaskManagerDOMControl.addTaskFormEl.addEventListener("submit", TaskManagerDOMCon
 
 // We use event delegation on container of all Tasks (dataTasksContentEl)
 
-TaskManagerDOMControl.dataTasksContentEl.addEventListener("click", e => {
+DOMTask.dataTasksContentEl.addEventListener("click", e => {
     const eventDataAttrObj = e.target.dataset;
     const eventDataAttr = Object.keys(eventDataAttrObj)[0];
 
     switch(eventDataAttr) {
         case "taskCheckbox":
             // Change "finished" status
-            TaskManagerDOMControl.changeTaskChecklistElClickEventHandler(e);
+            DOMTask.changeTaskChecklistElClickEventHandler(e);
         break;
         case "taskBtnDelete":
             // Delete Task
-            TaskManagerDOMControl.removeTaskBtnClickEventHandler(e);
+            DOMTask.removeTaskBtnClickEventHandler(e);
+        break;
+        case "taskBtnDetails":
+            // Open task details [dialog]
+            DOMTaskDialog.openTaskDetailsBtnClickEventHandler(e);
+        break;
+        case "taskBtnEdit":
+            // Open task details (edit mode) [dialog]
+            DOMTaskDialog.openTaskEditBtnClickEventHandler(e);
         break;
     }
 });
+
+/////////////////////////
+// Task dialog listeners
+/////////////////////////
+
+// We need this listeners when user opens a dialog to see or edit task data
+
+DOMTaskDialog.dialogEl.addEventListener("click", e => {
+    const eventDataAttrObj = e.target.dataset;
+    const eventElID = e.target.id;
+    const eventDataAttr = Object.keys(eventDataAttrObj)[0];
+
+    switch(eventDataAttr) {
+        case "taskDialogClose":
+            // Close dialog
+            DOMTaskDialog.closeTaskDialogBtnClickEventHandler(e);
+        break;
+        case "taskDialogPropertyValue":
+            // Checklist toggle
+            if(eventElID == "dialogTaskChecklist") {
+                DOMTaskDialog.changeDialogTaskChecklistElClickEventHandler(e);
+            }
+        break;
+    }
+})
+
+DOMTaskDialog.taskDialogFormEl.addEventListener("submit", DOMTaskDialog.taskDialogFormSubmitEventHandler);
