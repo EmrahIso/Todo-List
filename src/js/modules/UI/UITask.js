@@ -2,6 +2,10 @@ import deleteIcon from "../../../../assets/images/icons/trash.svg";
 import editIcon from "../../../../assets/images/icons/note-pencil.svg";
 import detailsIcon from "../../../../assets/images/icons/dots-three-bold.svg";
 
+// import from date-fns
+
+import { formatDistance } from 'date-fns';
+
 // We use this function to show tasks of some specified project when needed (update tasks board)
 
 function UIRenderTasks(projectName, allTasks) {
@@ -52,9 +56,25 @@ function UIRenderTasks(projectName, allTasks) {
         const taskDateEl = document.createElement("div");
         taskDateEl.classList.add("task__cell", "task__cell--flex-wrapper");
 
-        const taskDateValue = taskData["due date"].split("");
+        // Data task date
+
+        const dataYear = taskData["due date"].split("-")[0];
+        const dataMonth = taskData["due date"].split("-")[1];
+        const dataDay = taskData["due date"].split("-")[2];
+
+        const dataDate = new Date(dataYear, dataMonth, dataDay);
+
+        // Current Date
+
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1;
+        const currentDay = new Date().getDate();
+
+        const currentDate = new Date(currentYear, currentMonth, currentDay);
+
+        const taskDateValue = formatDistance(dataDate, currentDate, { addSuffix: true });
         
-        taskDateEl.textContent = taskDateValue.map(char => char === "-" ? " / " : char).join("");
+        taskDateEl.textContent = taskDateValue === "less than a minute ago" ? "Today" : taskDateValue;
 
         taskEl.appendChild(taskDateEl);
 
@@ -104,3 +124,6 @@ function UIRenderTasks(projectName, allTasks) {
 } 
 
 export { UIRenderTasks }
+
+console.log(new Date(2024, 0, 11));
+console.log(new Date(2024, 0, 11));

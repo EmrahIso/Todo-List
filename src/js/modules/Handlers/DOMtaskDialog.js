@@ -127,15 +127,12 @@ const DOMTaskDialog = (function() {
 
         const newValueTaskData = {};
 
-        console.log("main problem", newValueTaskData);
-
         // Update task property values in the dialog
 
         dialogEl.querySelectorAll("[data-task-dialog-property]").forEach(n => {
             const dataAttrValue = n.getAttribute("data-task-dialog-property");
 
             if(dataAttrValue == "checklist") {
-                console.log("WHAT", n.querySelector("[data-task-dialog-property-value]").value);
                 if(n.querySelector("[data-task-dialog-property-value]").value == "false") {
                     newValueTaskData[dataAttrValue] = false;
                 } else {
@@ -168,10 +165,8 @@ const DOMTaskDialog = (function() {
     }
 
     const changeDialogTaskChecklistElClickEventHandler = (e) => {
-        console.log("CHK", e.target);
 
         const currentBooleanValue = e.target.value === "true" ? true : false;
-        const task = getTaskManagerControl().getProject("Routine").getTask(document.querySelector("h2[data-dialog-task-name]").getAttribute("data-dialog-task-name"));
 
         if(currentBooleanValue) {
             e.target.value = false;

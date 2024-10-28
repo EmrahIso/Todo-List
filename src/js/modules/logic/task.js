@@ -61,8 +61,6 @@ function getPropertiesOfSpecificProjectsTask(projectName, taskName) {
 function updatePropertiesOfSpecificProjectsTask(projectName, taskName, newTaskData) { 
     const project = getTaskManagerControl().getProject(projectName);
 
-    console.log("newChecklistValue", newTaskData.checklist);
-
     const task = project.getTask(taskName);
 
     // Run all update methods 
