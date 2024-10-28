@@ -20,13 +20,25 @@ import "./modules/listeners.js";
 if (process.env.NODE_ENV !== 'production') {
     console.log('Looks like we are in development mode!');
 }
-
 ///////////////////////////////////
 // INITIAL RENDER
 ///////////////////////////////////
 
-// Add Default Project 
-addProjectToManager("Routine");
+///////////////////////
+// Add Default Projects
+///////////////////////
+
+const firstProjectName = "Routine";
+
+addProjectToManager(firstProjectName);
+
+const secondProjectName = "Workout";
+
+addProjectToManager(secondProjectName);
+
+const thirdProjectName = "Coding";
+
+addProjectToManager(thirdProjectName);
 
 // Render available projects
 
@@ -34,39 +46,21 @@ UIRenderProjects(getTaskManagerControl().getTaskManager());
 
 // Switch active project to "Routine" project both logically and visually
 
-switchActiveProject("Routine");
+switchActiveProject(thirdProjectName);
 UISwitchProjects(getActiveProject());
 
+///////////////////////////////////////////////
 
+///////////////////////////////////////
 // Add Default Tasks to Routine Project
-
-const date = new Date();
-
-// DAY
-const day = date.getDate();
-
-// MONTH
-// date.getMonth will return numbers like (1, 5, 10, 11). We need 2 decimals like (01, 05, 10, 11) 
-
-const returnedMonth = String(date.getMonth());
-
-const monthArray = Array.from(returnedMonth);
-
-if( monthArray.length < 2 ) {
-    monthArray.unshift("0");
-} 
-
-const month = monthArray.join("");
-
-// YEAR
-const year = date.getFullYear();
+///////////////////////////////////////
 
 // GoOutside task Data
 
 const goOutsideTaskData = {
     title: "Go outside",
     description: "Touch grass",
-    ["due date"]: `${year}-${month}-${day}`,
+    ["due date"]: `2024-11-11`,
     priority: "mid",
     notes: "Talk to someone, walk by the river",
     checklist: false,
@@ -74,48 +68,126 @@ const goOutsideTaskData = {
 
 // Add GoOutside Task to Routine Project
 
-addTaskToProject("Routine", goOutsideTaskData);
+addTaskToProject(firstProjectName, goOutsideTaskData);
 
-// Render available tasks of "Routine" Project (update board)
+// School task Data
 
-UIRenderTasks("Routine", getActiveProject().getTaskProject());
-
-
-// BrushYourTeth task Data
-
-const brushYourTeethTaskData = {
-    title: "Brush Teeth",
+const schoolTaskData = {
+    title: "School",
     description: "",
-    ["due date"]: `${year}-${month}-${day}`,
+    ["due date"]: `2024-6-1`,
     priority: "high",
     notes: "",
-    checklist: true,
+    checklist: false,
 }
 
 // Add BrushYourTeth Task to Routine Project
 
-addTaskToProject("Routine", brushYourTeethTaskData);
+addTaskToProject(firstProjectName, schoolTaskData);
 
 // Render available tasks of "Routine" Project (update board)
 
-UIRenderTasks("Routine", getActiveProject().getTaskProject());
+UIRenderTasks(firstProjectName, getTaskManagerControl().getProject(firstProjectName).getTaskProject());
 
+///////////////////////////////////////
+// Add Default Tasks to Workout Project
+///////////////////////////////////////
 
-// Workout task Data
+// Cardio task Data
 
-const workoutTaskData = {
-    title: "Workout",
-    description: "Chest, Shoulders, Triceps",
-    ["due date"]: `${year}-${month}-${day}`,
+const cardioTaskData = {
+    title: "Cardio",
+    description: "Running, and endurance",
+    ["due date"]: `${2024}-${10}-${28}`,
     priority: "low",
-    notes: "bench, dips, push ups, lateral raises",
+    notes: "Heavy bag, 10 minutes high intensity 15 minutes low",
     checklist: false,
 }
 
-// Add Workout Task to Routine Project
+// Add Cardio Task to Workout Project
 
-addTaskToProject("Routine", workoutTaskData);
+addTaskToProject("Workout", cardioTaskData);
 
-// Render available tasks of "Routine" Project (update board)
+// BJJ task Data 
 
-UIRenderTasks("Routine", getActiveProject().getTaskProject());
+const bjjTaskData = {
+    title: "BJJ Training",
+    description: "Brazilian jiu-jitsu",
+    ["due date"]: `2024-11-5`,
+    priority: "mid",
+    notes: "",
+    checklist: false,
+}
+
+// Add BJJ Task to Workout Project
+
+addTaskToProject("Workout", bjjTaskData);
+
+// UFC 308
+
+const ufcTaskData = {
+    title: "UFC 308",
+    description: "MMA",
+    ["due date"]: `2024-10-26`,
+    priority: "low",
+    notes: "",
+    checklist: true,
+}
+
+// Add UFC 308 Task to Workout Project
+
+addTaskToProject("Workout", ufcTaskData);
+
+UIRenderTasks(secondProjectName, getTaskManagerControl().getProject(secondProjectName).getTaskProject());
+
+
+///////////////////////////////////////
+// Add Default Tasks to Coding Project
+///////////////////////////////////////
+
+// Review SOLID
+
+const solidTaskData = {
+    title: "Review SOLID",
+    description: "Review SOLID principles",
+    ["due date"]: `2024-11-12`,
+    priority: "low",
+    notes: "",
+    checklist: false,
+}
+
+// Add SOLID Task to Coding Project
+
+addTaskToProject("Coding", solidTaskData);
+
+// Learn Linting
+
+const lintingTaskData = {
+    title: "Learn linting",
+    description: "Learn Linting",
+    ["due date"]: `2024-11-12`,
+    priority: "high",
+    notes: "",
+    checklist: false,
+}
+
+// Add Linting Task to Coding Project
+
+addTaskToProject("Coding", lintingTaskData);
+
+// Code Todo Project 
+
+const todoTaskData = {
+    title: "Code ToDo",
+    description: "Code ToDo project",
+    ["due date"]: `2024-9-27`,
+    priority: "mid",
+    notes: "",
+    checklist: true,
+}
+
+// Add Code Todo Project Task to Coding Project
+
+addTaskToProject("Coding", todoTaskData);
+
+UIRenderTasks(thirdProjectName, getTaskManagerControl().getProject(thirdProjectName).getTaskProject());

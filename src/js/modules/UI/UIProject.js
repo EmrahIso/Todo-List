@@ -9,6 +9,17 @@ function UIRenderProjects(allProjects) {
 
     dynamicProjectsNavigationListEl.querySelectorAll("*").forEach(n => n.remove());
 
+    // First we add heading
+
+    const headingContNavigationListItemEl = document.createElement("li");
+    headingContNavigationListItemEl.classList.add("navigation__list-item");
+    dynamicProjectsNavigationListEl.appendChild(headingContNavigationListItemEl);
+
+    const headingEl = document.createElement("h3");
+    headingEl.classList.add("tertiary-heading");
+    headingEl.textContent = "Projects: ";
+    headingContNavigationListItemEl.appendChild(headingEl);
+
     // We go through allProjects array and display all projects
 
     allProjectsArray.forEach(project => {
