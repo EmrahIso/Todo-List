@@ -75,7 +75,7 @@ addTaskToProject(firstProjectName, goOutsideTaskData);
 const schoolTaskData = {
     title: "School",
     description: "",
-    ["due date"]: `2024-6-1`,
+    ["due date"]: `2024-06-1`,
     priority: "high",
     notes: "",
     checklist: false,
@@ -98,7 +98,7 @@ UIRenderTasks(firstProjectName, getTaskManagerControl().getProject(firstProjectN
 const cardioTaskData = {
     title: "Cardio",
     description: "Running, and endurance",
-    ["due date"]: `${2024}-${10}-${28}`,
+    ["due date"]: `2024-10-28`,
     priority: "low",
     notes: "Heavy bag, 10 minutes high intensity 15 minutes low",
     checklist: false,
@@ -113,7 +113,7 @@ addTaskToProject("Workout", cardioTaskData);
 const bjjTaskData = {
     title: "BJJ Training",
     description: "Brazilian jiu-jitsu",
-    ["due date"]: `2024-11-5`,
+    ["due date"]: `2024-11-08`,
     priority: "mid",
     notes: "",
     checklist: false,
@@ -165,7 +165,7 @@ addTaskToProject("Coding", solidTaskData);
 const lintingTaskData = {
     title: "Learn linting",
     description: "Learn Linting",
-    ["due date"]: `2024-11-12`,
+    ["due date"]: `2024-11-08`,
     priority: "high",
     notes: "",
     checklist: false,
@@ -180,7 +180,7 @@ addTaskToProject("Coding", lintingTaskData);
 const todoTaskData = {
     title: "Code ToDo",
     description: "Code ToDo project",
-    ["due date"]: `2024-9-27`,
+    ["due date"]: `2024-09-27`,
     priority: "mid",
     notes: "",
     checklist: true,

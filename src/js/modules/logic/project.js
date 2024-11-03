@@ -56,7 +56,11 @@ function getActiveProject() {
 }
 
 function switchActiveProject(projectName) {
-    activeProject = getTaskManagerControl().getProject(projectName);
+    if(projectName === null) {
+        activeProject = "none";
+    } else {
+        activeProject = getTaskManagerControl().getProject(projectName);
+    }
 }
 
 export { TaskProjectCreator, addTaskToProject, getActiveProject, switchActiveProject}
