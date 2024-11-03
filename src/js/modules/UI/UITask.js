@@ -13,7 +13,16 @@ function UIRenderTasks(projectName, allTasks) {
 
     const contentEl = document.querySelector("[data-tasks-content]");
 
-    const projectWrapperEl = contentEl.querySelector(`[data-project-id="${projectName}"]`);
+    let projectWrapperEl;
+
+    if(projectName === "sort") {
+        projectWrapperEl = document.querySelector("[data-sort-board]");
+        projectWrapperEl.style.display = "block";
+
+        contentEl.querySelectorAll("div[data-project-id]").forEach(n => n.style.display = "none");
+    } else {
+        projectWrapperEl = contentEl.querySelector(`[data-project-id="${projectName}"]`);
+    }
 
     // Remove all tasks
     projectWrapperEl.querySelectorAll("*").forEach(n => n.remove());
@@ -54,7 +63,7 @@ function UIRenderTasks(projectName, allTasks) {
         taskEl.appendChild(taskTitleEl);
 
         const taskDateEl = document.createElement("div");
-        taskDateEl.classList.add("task__cell", "task__cell--flex-wrapper");
+        taskDateEl.classList.add("task__cell", "task__cell--flex-wrapper", "task__cell--date");
 
         // Data task date
 
@@ -77,21 +86,6 @@ function UIRenderTasks(projectName, allTasks) {
         taskDateEl.textContent = taskDateValue === "less than a minute ago" ? "Today" : taskDateValue;
 
         taskEl.appendChild(taskDateEl);
-
-        const taskDeleteEl = document.createElement("div");
-        taskDeleteEl.classList.add("task__cell");
-        taskEl.appendChild(taskDeleteEl);
-
-        const taskDeleteBtnEl = document.createElement("button");
-        taskDeleteBtnEl.classList.add("button", "button--task-control", "button--task-control--delete");
-        taskDeleteBtnEl.type = "button";
-        taskDeleteBtnEl.dataset.taskBtnDelete = "";
-        taskDeleteEl.appendChild(taskDeleteBtnEl);
-
-        const taskDeleteBtnDeleteIconEl = document.createElement("img");
-        taskDeleteBtnDeleteIconEl.src = deleteIcon;
-        taskDeleteBtnDeleteIconEl.style.pointerEvents = "none";
-        taskDeleteBtnEl.appendChild(taskDeleteBtnDeleteIconEl);
 
         const taskEditEl = document.createElement("div");
         taskEditEl.classList.add("task__cell");
@@ -120,10 +114,26 @@ function UIRenderTasks(projectName, allTasks) {
         const taskDetailsBtnDetailsIconEl = document.createElement("img");
         taskDetailsBtnDetailsIconEl.src = detailsIcon;
         taskDetailsBtnEl.appendChild(taskDetailsBtnDetailsIconEl);
+
+        const taskDeleteEl = document.createElement("div");
+        taskDeleteEl.classList.add("task__cell");
+        taskEl.appendChild(taskDeleteEl);
+
+        const taskDeleteBtnEl = document.createElement("button");
+        taskDeleteBtnEl.classList.add("button", "button--task-control", "button--task-control--delete");
+        taskDeleteBtnEl.type = "button";
+        taskDeleteBtnEl.dataset.taskBtnDelete = "";
+        taskDeleteEl.appendChild(taskDeleteBtnEl);
+
+        const taskDeleteBtnDeleteIconEl = document.createElement("img");
+        taskDeleteBtnDeleteIconEl.src = deleteIcon;
+        taskDeleteBtnDeleteIconEl.style.pointerEvents = "none";
+        taskDeleteBtnEl.appendChild(taskDeleteBtnDeleteIconEl);
+
+        if(projectName === "sort") {
+            taskEl.querySelectorAll("*").forEach(n => n.setAttribute("disabled", ""));
+        }
     });
 } 
 
 export { UIRenderTasks }
-
-console.log(new Date(2024, 0, 11));
-console.log(new Date(2024, 0, 11));

@@ -62,6 +62,7 @@ function UIRenderProjects(allProjects) {
 
             const projectTasksWrapperEl = document.createElement("div");
             projectTasksWrapperEl.dataset.projectId = project.name;
+            projectTasksWrapperEl.classList.add("task__cont");
             projectTasksWrapperEl.style.display = "none";
 
             contentEl.appendChild(projectTasksWrapperEl);
@@ -76,6 +77,11 @@ function UISwitchProjects(activeProject) {
     // Remove .selected class from all projects
     document.querySelectorAll("[data-project]").forEach(n => n.classList.remove("selected"));
 
+    if(typeof activeProject !== "object") {
+        document.querySelector("[data-active-project-heading]").textContent = activeProject;
+        return;
+    } 
+
     const activeProjectBtnEl = document.querySelector(`[data-project="${activeProject.name}"]`);
     activeProjectBtnEl.classList.add("selected");
 
@@ -89,9 +95,11 @@ function UISwitchProjects(activeProject) {
         if(el.getAttribute("data-project-id") !== activeProject.name) {
             el.style.display = "none";
         } else {
-            el.style.display = "block";
+            el.style.display = "grid";
         }
     })
+
+    document.querySelector("[data-sort-board]").style.display = "none";
 }
 
 export { UIRenderProjects, UISwitchProjects }
