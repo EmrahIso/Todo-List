@@ -24,19 +24,9 @@
     // Type-scale
     
     @each $screen-size, $font-size in $type-scale {
-        @if $screen-size != small {
-            & {
-                @each $size, $value in $font-size {
-                    --fs-#{$size}: #{$value};
-                }
-            }
-        } @else {
-            &.small-type-scale {
-                @include respond-to(small) {
-                    @each $size, $value in $font-size {
-                        --fs-#{$size}: #{$value};
-                    }
-                }   
+        & {
+            @each $size, $value in $font-size {
+                --fs-#{$size}: #{$value};
             }
         }
     }

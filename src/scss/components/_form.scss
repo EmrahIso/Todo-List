@@ -14,6 +14,10 @@
         opacity: 0;
         transform: scaleY(.5);
         height: 0;
+
+        @include respond-to(large) {
+            grid-template-columns: 1fr;
+        }
     }
 
     &--add-task {
@@ -26,6 +30,14 @@
         opacity: 0;
         transform: scaleY(.75);
         height: 0;
+
+        @include respond-to(extra-large) {
+            padding: toRem(16) 0 toRem(16) 0;
+        }
+
+        @include respond-to(extra-small) {
+            grid-template-columns: repeat(auto-fit, minmax(toRem(160), 1fr));
+        }
     }
 
     &--dialog {
@@ -44,10 +56,20 @@
                 grid-template-columns: 3fr 7fr;
                 align-items: center;
                 gap: toRem(32);
+
+                @include respond-to(medium) {
+                    grid-template-columns: 1fr;
+                    gap: toRem(8);
+                }
     
                 & label {
                     display: flex;
                     justify-content: flex-end;
+
+                    @include respond-to(medium) {
+                        justify-content: flex-start;
+                        padding-left: 0;
+                    }
                 }
             }
         }
@@ -132,6 +154,11 @@
             border: 2px solid var(--clr-neutral-400);
             cursor: pointer;
 
+            @include respond-to(medium) {
+                height: toRem(13);
+                width: toRem(13);
+            }
+
             &::after {
                 content: "\2713";
                 pointer-events: none;
@@ -147,6 +174,11 @@
                 transform: translate(-50%, -50%) scale(0);
                 opacity: 0;
                 transition: all .3s;
+
+                @include respond-to(medium) {
+                    height: toRem(8);
+                    width: toRem(8);
+                }
             }
 
             &:checked {

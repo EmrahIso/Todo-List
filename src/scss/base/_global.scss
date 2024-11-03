@@ -7,7 +7,11 @@ html {
 body {
     background-color: var(--clr-neutral-700);
     color: var(--clr-neutral-300);
-    padding: 2rem;
+    padding: toRem(32);
+
+    @include respond-to(medium) {
+        padding: 0;
+    }
 }
 
 .container {
@@ -28,4 +32,10 @@ hr {
 
 img {
     pointer-events: none;
+}
+
+.icon-main {
+    @include respond-to(extra-small) {
+        display: none;
+    }
 }

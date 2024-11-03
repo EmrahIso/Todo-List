@@ -9,4 +9,13 @@
     
     background-color: var(--clr-neutral-500);
     box-shadow: var(--shw-light-bottom);
+
+    @include respond-to(large) {
+        grid-template-columns: 1fr;
+        gap: toRem(32);
+    }   
+
+    @include respond-to(medium) {
+        margin-top: 0;
+    }
 }

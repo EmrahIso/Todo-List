@@ -22,6 +22,11 @@
         background-color: transparent;
         transition: all .2s ease-in;
 
+        @include respond-to(medium) {
+            gap: toRem(12);
+            font-size: var(--fs-200);
+        }
+
         &:hover,
         &:active {
             background-color: var(--clr-neutral-500);
@@ -46,10 +51,67 @@
             }
         }
 
+        svg {
+            pointer-events: none;
+        }
+
         span {
             pointer-events: none;
         }
     }
+
+    &--menu {
+        display: none;
+        width: auto;
+        position: relative;
+
+        width: toRem(32);
+
+        & span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: toRem(32);
+            height: toRem(3);
+            border-radius: toRem(16);
+            background-color: var(--clr-neutral-400);
+            pointer-events: none;
+            transition: transform .35s;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: toRem(3);
+            border-radius: toRem(16);
+            background-color: var(--clr-neutral-400);
+            transform-origin: center;
+            pointer-events: none;
+            transition: transform .35s;
+        }
+
+        &::before {
+            top: auto;
+            bottom: 0;
+        }
+
+        &[data-navigation-status="opened"]::before {
+            transform: translateY(-200%) rotate(45deg);
+        }
+
+        &[data-navigation-status="opened"]::after {
+            transform: translateY(200%) rotate(-45deg);
+        }
+
+        @include respond-to(large) {
+            display: flex;
+        }
+    } 
 
     &--add-project,
     &--add-task  {
@@ -60,6 +122,12 @@
         &--cancel {
             background-color: var(--clr-rd-400);
             color: var(--clr-neutral-300);
+        }
+    }
+
+    &--add-project--cancel {
+        @include respond-to(large) {
+            display: none;
         }
     }
 
@@ -88,6 +156,12 @@
             display: flex;
             align-items: center;
             gap: toRem(24);
+
+            @include respond-to(extra-small) {
+                & .button__label {
+                    display: none;
+                }
+            }
         }
 
         &::before,

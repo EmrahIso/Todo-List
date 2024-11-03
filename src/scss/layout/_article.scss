@@ -9,5 +9,18 @@
         align-items: center;
         padding-bottom: toRem(22);
         border-bottom: 1px solid var(--clr-neutral-405);
+
+        @include respond-to(extra-small) {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    
+    @include respond-to(extra-large) {
+        padding: toRem(8) toRem(20) toRem(12);
+    }
+
+    @include respond-to(large) {
+        padding: toRem(8);
     }
 }

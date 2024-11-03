@@ -11,6 +11,10 @@
     background-color: var(--clr-neutral-500);
     box-shadow: var(--shw-light-bottom);
 
+    @include respond-to(medium) {
+        padding: toRem(16);
+    }
+
     &__heading {
         color: var(--clr-neutral-300);
     }

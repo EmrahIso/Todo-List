@@ -12,4 +12,10 @@
     .icon-main {
         fill: var(--clr-grn-400);
     }
+
+    @include respond-to(large) {
+        & > *:not(:first-child) {
+            display: none;
+        }
+    }   
 }

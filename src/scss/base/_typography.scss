@@ -47,6 +47,10 @@ body {
     span {
         display: inline-block;
     }
+
+    @include respond-to(medium) {
+        font-size: var(--fs-400);
+    }
 }
 
 .tertiary-heading {

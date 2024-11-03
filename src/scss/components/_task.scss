@@ -4,8 +4,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: var(--clr-neutral-425);
     padding: 0 toRem(32) 0 toRem(32);
     gap: toRem(16);
+
+    @include respond-to(extra-large) {
+        gap: toRem(12);
+        padding: 0 toRem(8);
+    }
+
+    @include respond-to(medium) {
+        gap: 0;
+        padding: toRem(16) toRem(10);
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__cont {
+        @include respond-to(medium) {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(toRem(160), 1fr));
+            gap: toRem(16);
+        }
+    }
 
     &:nth-child(odd) {
         background-color: var(--clr-neutral-600);
@@ -26,14 +47,43 @@
         padding: toRem(32) toRem(10);
         font-size: var(--fs-300);
 
+        @include respond-to(extra-large) {
+            padding: toRem(32) toRem(8);
+        }
+
+        @include respond-to(medium) {
+            font-size: var(--fs-200);
+            padding: toRem(8) toRem(6);
+        }
+
         &--flex-wrapper {
             flex: 1;
             display: flex;
             justify-content: flex-end;
+            padding: toRem(32) toRem(0);
+
+            @include respond-to(medium) {
+                flex-grow: 0;
+                padding: toRem(8) toRem(6);
+            }
+        }
+
+        &--date {
+            @include respond-to(medium) {
+                padding-right: toRem(6);
+            }
         }
 
         &--priority {
             position: relative;
+
+            @include respond-to(extra-large) {
+                padding: toRem(32) toRem(16);
+            }
+
+            @include respond-to(medium) {
+                padding: toRem(20) toRem(20);
+            }
 
             &::after {
                 font-size: var(--fs-400);
@@ -47,6 +97,12 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+
+                @include respond-to(medium) {
+                    height: toRem(28);
+                    width: toRem(28);
+                    font-size: var(--fs-300);
+                }
             }
 
             &-high {
@@ -71,6 +127,17 @@
                     background-color: var(--clr-cyn-400);
                 }
             }
+        }
+
+        & img {
+            @include respond-to(medium) {
+                height: 24px;
+                width: 24px;
+            }
+        }
+
+        &[disabled] {
+            filter: contrast(.75);
         }
     }
 

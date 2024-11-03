@@ -16,5 +16,10 @@
 
     .icon-navigation {
         fill: var(--clr-neutral-200);
+
+        @include respond-to(medium) {
+            height: 24px;
+            width: 24px;
+        }
     }
 }
