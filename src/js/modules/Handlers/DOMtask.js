@@ -24,6 +24,7 @@ const DOMTask = (function() {
         addTaskFormEl.style.visibility = "visible";
         addTaskFormEl.style.height = "auto";
         addTaskFormEl.style.transform = "scaleY(1)";
+        addTaskFormEl.style.padding = "32px 0 48px 0";
     }
 
     // Handler for closing the task form
@@ -39,6 +40,7 @@ const DOMTask = (function() {
         addTaskFormEl.style.visibility = "hidden";
         addTaskFormEl.style.height = "0";
         addTaskFormEl.style.transform = "scaleY(.75)";
+        addTaskFormEl.style.padding = "16px 0 16px 0";
 
         // empty form fields
 
