@@ -1,6 +1,8 @@
 import { DOMProject } from "./Handlers/DOMproject.js";
 import { DOMTask } from "./Handlers/DOMtask.js";
 import { DOMTaskDialog } from "./Handlers/DOMtaskDialog.js";
+import { DOMNavigation } from "./Handlers/DOMNavigation.js";
+import { DOMSort } from "./Handlers/DOMSorting.js";
 
 ///////////////
 // For Projects
@@ -104,3 +106,30 @@ DOMTaskDialog.dialogEl.addEventListener("click", e => {
 })
 
 DOMTaskDialog.taskDialogFormEl.addEventListener("submit", DOMTaskDialog.taskDialogFormSubmitEventHandler);
+
+//////////////
+// For Sorting
+//////////////
+
+DOMSort.sortNavigationEl.addEventListener("click", e => {
+    const eventDataAttrObj = e.target.dataset;
+    const eventDataAttr = Object.keys(eventDataAttrObj)[0];
+
+    switch(eventDataAttr) {
+        case "sortInbox": 
+            DOMSort.sortInboxBtnClickEventHandler(e);
+        break;
+        case "sortCompleted":
+            DOMSort.sortCompletedBtnClickEventHandler(e);
+        break;
+        case "sortWeek":
+            DOMSort.sortWeekBtnClickEventHandler(e);
+        break;
+    }
+})
+
+/////////////////////////
+// For Navigation
+/////////////////////////
+
+DOMNavigation.navigationBtnEl.addEventListener("click", DOMNavigation.toggleNavigationBtnClickEventHandler);
