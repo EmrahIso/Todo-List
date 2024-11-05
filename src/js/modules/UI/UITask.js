@@ -31,7 +31,7 @@ function UIRenderTasks(projectName, allTasks) {
 
     allTasksArray.forEach(task => {
         const taskData = task.taskObj;     
-
+        
         const taskEl = document.createElement("div");
         taskEl.dataset.task = taskData.title;
         taskEl.classList.add("task");

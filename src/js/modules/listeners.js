@@ -3,6 +3,7 @@ import { DOMTask } from "./Handlers/DOMtask.js";
 import { DOMTaskDialog } from "./Handlers/DOMtaskDialog.js";
 import { DOMNavigation } from "./Handlers/DOMNavigation.js";
 import { DOMSort } from "./Handlers/DOMSorting.js";
+import { updateStorage } from "./storage.js";
 
 ///////////////
 // For Projects
@@ -133,3 +134,11 @@ DOMSort.sortNavigationEl.addEventListener("click", e => {
 /////////////////////////
 
 DOMNavigation.navigationBtnEl.addEventListener("click", DOMNavigation.toggleNavigationBtnClickEventHandler);
+
+//////////////
+// For storage
+//////////////
+
+window.addEventListener("beforeunload", e => {
+    updateStorage();
+})
