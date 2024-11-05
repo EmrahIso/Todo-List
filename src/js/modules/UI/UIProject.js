@@ -50,6 +50,7 @@ function UIRenderProjects(allProjects) {
 
         const projectButtonDeleteButtonIconEl = document.createElement("img");
         projectButtonDeleteButtonIconEl.src = deleteIcon;
+        projectButtonDeleteButtonIconEl.setAttribute("alt", "icon");
         projectButtonDeleteButtonIconEl.style.pointerEvents = "none";
         projectButtonDeleteButtonEl.appendChild(projectButtonDeleteButtonIconEl);
         projectButtonEl.appendChild(projectButtonDeleteButtonEl);

@@ -99,6 +99,7 @@ function UIRenderTasks(projectName, allTasks) {
 
         const taskEditBtnEditIconEl = document.createElement("img");
         taskEditBtnEditIconEl.src = editIcon;
+        taskEditBtnEditIconEl.setAttribute("alt", "icon");
         taskEditBtnEl.appendChild(taskEditBtnEditIconEl);
 
         const taskDetailsEl = document.createElement("div");
@@ -113,6 +114,7 @@ function UIRenderTasks(projectName, allTasks) {
 
         const taskDetailsBtnDetailsIconEl = document.createElement("img");
         taskDetailsBtnDetailsIconEl.src = detailsIcon;
+        taskDetailsBtnDetailsIconEl.setAttribute("alt", "icon");
         taskDetailsBtnEl.appendChild(taskDetailsBtnDetailsIconEl);
 
         const taskDeleteEl = document.createElement("div");
@@ -127,6 +129,7 @@ function UIRenderTasks(projectName, allTasks) {
 
         const taskDeleteBtnDeleteIconEl = document.createElement("img");
         taskDeleteBtnDeleteIconEl.src = deleteIcon;
+        taskDeleteBtnDeleteIconEl.setAttribute("alt", "icon");
         taskDeleteBtnDeleteIconEl.style.pointerEvents = "none";
         taskDeleteBtnEl.appendChild(taskDeleteBtnDeleteIconEl);
 

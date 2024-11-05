@@ -1,5 +1,5 @@
-# Project-name
-Project description 
+# TODO-List
+TODO List is a task management system where you can store your tasks that you manage in different project and different categories.
 
 ## Table of concepts
 - [Overview](#overview)
@@ -10,21 +10,23 @@ Project description
 
 ## Overview
 
-### Screenshot
+### Screenshots
 
-![](screenshot)
+![Desktop](./assets/images/screenshots/screenshot-desktop.png)
+
+![Mobile](./assets/images/screenshots/screenshot-mobile.png)
+
 
 ### Links
-  - Live preview - [Project](live link)
-  - GitHub repo - [Project Repo](Repo link)
+  - Live preview - [ToDo List](https://emrahiso.github.io/Todo-List/)
+  - GitHub repo - [ToDO List Repo](https://github.com/EmrahIso/Todo-List.git)
 
 ## Built with 
-  - Technology
-  - Technology
-  - Technology
-  - Technology
-  - Technology
-  - Technology
+  - HTML
+  - CSS
+  - SCSS
+  - JS
+  - WEBPACK
   
 ## Author
 
