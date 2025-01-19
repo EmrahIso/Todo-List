@@ -245,3 +245,9 @@ if (localStorage.length === 0) {
 switchActiveProject(localStorage.getItem("--tdl-activeProject"));
 
 UISwitchProjects(getActiveProject());
+
+//////////////////////////////
+// I am using --tdl- prefix for our localStorage keys so that we know that that keys are for this project.
+// I do that because I have more projects that are using localStorage on the same origin
+// So all that projects are sharing all keys and values of localStorage
+//////////////////////////////
