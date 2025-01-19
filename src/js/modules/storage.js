@@ -25,14 +25,20 @@ if (process.env.NODE_ENV !== "production") {
 export function updateStorage() {
   const storageObject = {};
 
-  for (let key in localStorage)
-    if (key !== "activeProject")
-      storageObject[key] = localStorage.getItem(`--tdl-${key}`);
+  for (let key in localStorage) {
+    const keyPrefix = key.split("").splice(0, 6).join("");
+    if (keyPrefix === "--tdl-") {
+      if (key !== "--tdl-activeProject") {
+        storageObject[key] = localStorage.getItem(`--tdl-${key}`);
+      }
+    }
+  }
 
   // Fill up storageObject with new data
 
-  for (let projectKey in storageObject)
-    localStorage.removeItem(`--tdl-${projectKey}`);
+  for (let projectKey in storageObject) {
+    localStorage.removeItem(projectKey);
+  }
 
   const taskManager = getTaskManagerControl().getTaskManager();
 
@@ -62,9 +68,16 @@ function renderStorage() {
   // Render Projects
 
   Object.keys(localStorage).forEach((projectName) => {
-    const newProjectName = projectName.split("").slice(6).join("");
-    allProjects[newProjectName] = { name: newProjectName };
-    if (projectName !== "activeProject") addProjectToManager(newProjectName);
+    const projectPrefix = projectName.split("").splice(0, 6).join("");
+
+    if (projectPrefix === "--tdl-") {
+      const newProjectName = projectName.split("").slice(6).join("");
+      console.log(newProjectName);
+      if (newProjectName !== "activeProject") {
+        allProjects[newProjectName] = { name: newProjectName };
+        addProjectToManager(newProjectName);
+      }
+    }
   });
 
   delete allProjects["activeProject"];
