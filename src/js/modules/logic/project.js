@@ -4,47 +4,50 @@ import { TaskCreator } from "./task";
 // Function that creates project Object
 
 function TaskProjectCreator(name) {
-    const taskProject = {};
+  const taskProject = {};
 
-    const getTaskProject = () => taskProject;
+  const getTaskProject = () => taskProject;
 
-    const addTask = (task) => {
-        taskProject[task.taskObj.title] = task;
-    }
+  const addTask = (task) => {
+    taskProject[task.taskObj.title] = task;
+  };
 
-    const getTask = (taskName) => {
-        return taskProject[taskName];
-    }
+  const getTask = (taskName) => {
+    return taskProject[taskName];
+  };
 
-    const changeTaskKey = (oldKeyValue, newKeyValue) => {
+  const changeTaskKey = (oldKeyValue, newKeyValue) => {
+    Object.defineProperty(
+      taskProject,
+      newKeyValue,
+      Object.getOwnPropertyDescriptor(taskProject, oldKeyValue)
+    );
 
-        Object.defineProperty(taskProject, newKeyValue, Object.getOwnPropertyDescriptor(taskProject, oldKeyValue));
+    if (oldKeyValue != newKeyValue) delete taskProject[oldKeyValue];
+  };
 
-        if(oldKeyValue != newKeyValue) delete taskProject[oldKeyValue];
-    }
+  const removeTask = (taskName) => {
+    const taskProjectTasks = Object.keys(taskProject);
 
-    const removeTask = (taskName) => {
-        const taskProjectTasks = Object.keys(taskProject);
+    taskProjectTasks.forEach((key) => {
+      if (key === taskName) {
+        delete taskProject[key];
+      }
+    });
+  };
 
-        taskProjectTasks.forEach(key => {
-            if(key === taskName) {
-                delete taskProject[key];
-            }
-        })
-    }
-
-    return { getTaskProject, addTask, name, getTask, removeTask, changeTaskKey }
+  return { getTaskProject, addTask, name, getTask, removeTask, changeTaskKey };
 }
 
 /////////////////////////////////////////////
 
 // Functions that are associated with the project Object
 
-function addTaskToProject(projectName, taskData) { 
-    const project = getTaskManagerControl().getProject(projectName);
+function addTaskToProject(projectName, taskData) {
+  const project = getTaskManagerControl().getProject(projectName);
 
-    const task = TaskCreator(taskData);
-    project.addTask(task);
+  const task = TaskCreator(taskData);
+  project.addTask(task);
 }
 
 // We use the activeProject variable to display one project at a time on the board
@@ -52,15 +55,20 @@ function addTaskToProject(projectName, taskData) {
 let activeProject = null;
 
 function getActiveProject() {
-    return activeProject;
+  return activeProject;
 }
 
 function switchActiveProject(projectName) {
-    if(projectName === null) {
-        activeProject = "none";
-    } else {
-        activeProject = getTaskManagerControl().getProject(projectName);
-    }
+  if (projectName === null) {
+    activeProject = "none";
+  } else {
+    activeProject = getTaskManagerControl().getProject(projectName);
+  }
 }
 
-export { TaskProjectCreator, addTaskToProject, getActiveProject, switchActiveProject}
+export {
+  TaskProjectCreator,
+  addTaskToProject,
+  getActiveProject,
+  switchActiveProject,
+};
