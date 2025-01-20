@@ -32,6 +32,8 @@ function TaskManagerCreator() {
   const hasProject = (name) => {
     let returnValue = null;
 
+    if (typeof name !== "string") return returnValue;
+
     const taskManagerKeys = Object.keys(taskManager);
     const taskManagerLowerCaseKeys = taskManagerKeys.map((key) =>
       key.toLowerCase()

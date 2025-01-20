@@ -1,6 +1,7 @@
 import {
   getTaskManagerControl,
   addProjectToManager,
+  checkForProject,
 } from "./logic/TaskManager";
 
 import {
@@ -28,38 +29,57 @@ export function updateStorage() {
   for (let key in localStorage) {
     const keyPrefix = key.split("").splice(0, 6).join("");
     if (keyPrefix === "--tdl-") {
-      if (key !== "--tdl-activeProject") {
-        storageObject[key] = localStorage.getItem(`--tdl-${key}`);
-      }
+      storageObject[key] = localStorage.getItem(`--tdl-${key}`);
     }
   }
 
   // Fill up storageObject with new data
 
   for (let projectKey in storageObject) {
-    localStorage.removeItem(projectKey);
+    if (getActiveProject() !== "none" && projectKey !== "--tdl-activeProject") {
+      localStorage.removeItem(projectKey);
+    }
   }
 
   const taskManager = getTaskManagerControl().getTaskManager();
 
   Object.values(taskManager).forEach((project) => {
-    storageObject[project.name] = project;
+    storageObject[`--tdl-${project.name}`] = project;
 
-    const projectTasksObj = storageObject[project.name].getTaskProject();
+    const projectTasksObj =
+      storageObject[`--tdl-${project.name}`].getTaskProject();
 
-    storageObject[project.name] = { name: project.name };
+    storageObject[`--tdl-${project.name}`] = { name: project.name };
 
     Object.values(projectTasksObj).forEach((task) => {
-      storageObject[project.name][task.taskObj.title] = {
+      storageObject[`--tdl-${project.name}`][task.taskObj.title] = {
         taskObj: task.taskObj,
       };
     });
 
     localStorage.setItem(
       `--tdl-${project.name}`,
-      JSON.stringify(storageObject[project.name])
+      JSON.stringify(storageObject[`--tdl-${project.name}`])
     );
   });
+
+  const newActiveProject = getActiveProject();
+
+  if (newActiveProject !== "none") {
+    if (checkForProject(newActiveProject.name)) {
+      localStorage.setItem("--tdl-activeProject", newActiveProject.name);
+    } else {
+      const allProjects = Object.values(
+        getTaskManagerControl().getTaskManager()
+      );
+      const firstProjectInManager = allProjects[0];
+
+      if (firstProjectInManager === undefined)
+        localStorage.setItem("--tdl-activeProject", "");
+
+      localStorage.setItem("--tdl-activeProject", firstProjectInManager.name);
+    }
+  }
 }
 
 function renderStorage() {
@@ -72,7 +92,7 @@ function renderStorage() {
 
     if (projectPrefix === "--tdl-") {
       const newProjectName = projectName.split("").slice(6).join("");
-      console.log(newProjectName);
+
       if (newProjectName !== "activeProject") {
         allProjects[newProjectName] = { name: newProjectName };
         addProjectToManager(newProjectName);
@@ -99,6 +119,12 @@ function renderStorage() {
       addTaskToProject(project.name, task.taskObj);
     });
   });
+
+  // Render activeProject
+
+  switchActiveProject(localStorage.getItem("--tdl-activeProject"));
+
+  UISwitchProjects(getActiveProject());
 }
 
 ///////////////////
@@ -246,18 +272,14 @@ if (localStorage.length === 0) {
   localStorage.setItem("--tdl-Workout", JSON.stringify(workoutProject));
   localStorage.setItem("--tdl-Coding", JSON.stringify(codingProject));
 
-  renderStorage();
-
   // Add initial activeProject
 
   localStorage.setItem("--tdl-activeProject", codingProject.name);
+
+  renderStorage();
 } else {
   renderStorage();
 }
-
-switchActiveProject(localStorage.getItem("--tdl-activeProject"));
-
-UISwitchProjects(getActiveProject());
 
 //////////////////////////////
 // I am using --tdl- prefix for our localStorage keys so that we know that that keys are for this project.
