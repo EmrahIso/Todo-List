@@ -1,5 +1,5 @@
-import { getTaskManagerControl } from "./TaskManager";
-import { TaskCreator } from "./task";
+import { getTaskManagerControl } from './TaskManager.js';
+import { TaskCreator } from './task.js';
 
 // Function that creates project Object
 
@@ -20,7 +20,7 @@ function TaskProjectCreator(name) {
     Object.defineProperty(
       taskProject,
       newKeyValue,
-      Object.getOwnPropertyDescriptor(taskProject, oldKeyValue)
+      Object.getOwnPropertyDescriptor(taskProject, oldKeyValue),
     );
 
     if (oldKeyValue != newKeyValue) delete taskProject[oldKeyValue];
@@ -60,7 +60,7 @@ function getActiveProject() {
 
 function switchActiveProject(projectName) {
   if (projectName === null) {
-    activeProject = "none";
+    activeProject = 'none';
   } else {
     activeProject = getTaskManagerControl().getProject(projectName);
   }

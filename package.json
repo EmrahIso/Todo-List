@@ -1,20 +1,44 @@
 {
-  "name": "project-name",
+  "name": "todo-list",
   "version": "1.0.0",
-  "description": "Project description",
-  "main": "index.js",
+  "description": "TODO List is a task management system where you can store your tasks that you manage in different project and different categories.",
+  "main": "./src/js/index.js",
+  "type": "module",
   "scripts": {
+    "test:watch": "jest --watch *.test.js",
     "dev": "webpack serve --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
+    "eslint": "npx eslint . --config eslint.config.js",
     "deploy": "git subtree push --prefix dist origin gh-pages"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "prettier": {
+    "singleQuote": true
   },
   "keywords": [],
   "author": "Emrah Isovic",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.27.0",
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@eslint/js": "^9.25.1",
+    "babel-jest": "^29.7.0",
+    "babel-loader": "^10.0.0",
+    "core-js": "^3.41.0",
     "css-loader": "^7.1.2",
     "date-fns": "^4.1.0",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
     "html-webpack-plugin": "^5.6.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.5.3",
     "sass": "^1.79.4",
     "sass-loader": "^16.0.2",
     "style-loader": "^4.0.0",

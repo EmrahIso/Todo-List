@@ -1,9 +1,9 @@
-import { DOMProject } from "./Handlers/DOMproject.js";
-import { DOMTask } from "./Handlers/DOMtask.js";
-import { DOMTaskDialog } from "./Handlers/DOMtaskDialog.js";
-import { DOMNavigation } from "./Handlers/DOMNavigation.js";
-import { DOMSort } from "./Handlers/DOMSorting.js";
-import { updateStorage } from "./storage.js";
+import { DOMProject } from './Handlers/DOMproject.js';
+import { DOMTask } from './Handlers/DOMtask.js';
+import { DOMTaskDialog } from './Handlers/DOMtaskDialog.js';
+import { DOMNavigation } from './Handlers/DOMNavigation.js';
+import { DOMSort } from './Handlers/DOMSorting.js';
+import { updateStorage } from './storage.js';
 
 ///////////////
 // For Projects
@@ -12,36 +12,36 @@ import { updateStorage } from "./storage.js";
 // Open project Form (we need this form to add project)
 
 DOMProject.openProjectFormBtnEl.addEventListener(
-  "click",
-  DOMProject.openProjectFormBtnClickEventHandler
+  'click',
+  DOMProject.openProjectFormBtnClickEventHandler,
 );
 
 // Add project
 
 DOMProject.addProjectFormEl.addEventListener(
-  "submit",
-  DOMProject.addProjectFormSubmitEventHandler
+  'submit',
+  DOMProject.addProjectFormSubmitEventHandler,
 );
 
 // Cancel project (and close project form)
 
 DOMProject.cancelProjectBtnEl.addEventListener(
-  "click",
-  DOMProject.cancelProjectBtnClickEventHandler
+  'click',
+  DOMProject.cancelProjectBtnClickEventHandler,
 );
 
 // Remove Project
 
 DOMProject.removeProjectListEl.addEventListener(
-  "click",
-  DOMProject.removeProjectBtnClickEventHandler
+  'click',
+  DOMProject.removeProjectBtnClickEventHandler,
 );
 
 // Show tasks of active project
 
 DOMProject.projectButtonsContEl.addEventListener(
-  "click",
-  DOMProject.switchActiveProjectsContClickEventHandler
+  'click',
+  DOMProject.switchActiveProjectsContClickEventHandler,
 );
 
 ////////////
@@ -51,22 +51,22 @@ DOMProject.projectButtonsContEl.addEventListener(
 // Open task Form (we need this form to add task and to gather data)
 
 DOMTask.openTaskFormBtnEl.addEventListener(
-  "click",
-  DOMTask.openTaskFormBtnClickEventHandler
+  'click',
+  DOMTask.openTaskFormBtnClickEventHandler,
 );
 
 // Close task Form
 
 DOMTask.closeTaskFormBtnEl.addEventListener(
-  "click",
-  DOMTask.closeTaskFormBtnClickEventHandler
+  'click',
+  DOMTask.closeTaskFormBtnClickEventHandler,
 );
 
 // Add task to active project
 
 DOMTask.addTaskFormEl.addEventListener(
-  "submit",
-  DOMTask.addTaskFormSubmitEventHandler
+  'submit',
+  DOMTask.addTaskFormSubmitEventHandler,
 );
 
 /////////////////////////
@@ -81,24 +81,24 @@ DOMTask.addTaskFormEl.addEventListener(
 
 // We use event delegation on container of all Tasks (dataTasksContentEl)
 
-DOMTask.dataTasksContentEl.addEventListener("click", (e) => {
+DOMTask.dataTasksContentEl.addEventListener('click', (e) => {
   const eventDataAttrObj = e.target.dataset;
   const eventDataAttr = Object.keys(eventDataAttrObj)[0];
 
   switch (eventDataAttr) {
-    case "taskCheckbox":
+    case 'taskCheckbox':
       // Change "finished" status
       DOMTask.changeTaskChecklistElClickEventHandler(e);
       break;
-    case "taskBtnDelete":
+    case 'taskBtnDelete':
       // Delete Task
       DOMTask.removeTaskBtnClickEventHandler(e);
       break;
-    case "taskBtnDetails":
+    case 'taskBtnDetails':
       // Open task details [dialog]
       DOMTaskDialog.openTaskDetailsBtnClickEventHandler(e);
       break;
-    case "taskBtnEdit":
+    case 'taskBtnEdit':
       // Open task details (edit mode) [dialog]
       DOMTaskDialog.openTaskEditBtnClickEventHandler(e);
       break;
@@ -111,19 +111,19 @@ DOMTask.dataTasksContentEl.addEventListener("click", (e) => {
 
 // We need this listeners when user opens a dialog to see or edit task data
 
-DOMTaskDialog.dialogEl.addEventListener("click", (e) => {
+DOMTaskDialog.dialogEl.addEventListener('click', (e) => {
   const eventDataAttrObj = e.target.dataset;
   const eventElID = e.target.id;
   const eventDataAttr = Object.keys(eventDataAttrObj)[0];
 
   switch (eventDataAttr) {
-    case "taskDialogClose":
+    case 'taskDialogClose':
       // Close dialog
       DOMTaskDialog.closeTaskDialogBtnClickEventHandler(e);
       break;
-    case "taskDialogPropertyValue":
+    case 'taskDialogPropertyValue':
       // Checklist toggle
-      if (eventElID == "dialogTaskChecklist") {
+      if (eventElID == 'dialogTaskChecklist') {
         DOMTaskDialog.changeDialogTaskChecklistElClickEventHandler(e);
       }
       break;
@@ -131,26 +131,26 @@ DOMTaskDialog.dialogEl.addEventListener("click", (e) => {
 });
 
 DOMTaskDialog.taskDialogFormEl.addEventListener(
-  "submit",
-  DOMTaskDialog.taskDialogFormSubmitEventHandler
+  'submit',
+  DOMTaskDialog.taskDialogFormSubmitEventHandler,
 );
 
 //////////////
 // For Sorting
 //////////////
 
-DOMSort.sortNavigationEl.addEventListener("click", (e) => {
+DOMSort.sortNavigationEl.addEventListener('click', (e) => {
   const eventDataAttrObj = e.target.dataset;
   const eventDataAttr = Object.keys(eventDataAttrObj)[0];
 
   switch (eventDataAttr) {
-    case "sortInbox":
+    case 'sortInbox':
       DOMSort.sortInboxBtnClickEventHandler(e);
       break;
-    case "sortCompleted":
+    case 'sortCompleted':
       DOMSort.sortCompletedBtnClickEventHandler(e);
       break;
-    case "sortWeek":
+    case 'sortWeek':
       DOMSort.sortWeekBtnClickEventHandler(e);
       break;
   }
@@ -161,14 +161,14 @@ DOMSort.sortNavigationEl.addEventListener("click", (e) => {
 /////////////////////////
 
 DOMNavigation.navigationBtnEl.addEventListener(
-  "click",
-  DOMNavigation.toggleNavigationBtnClickEventHandler
+  'click',
+  DOMNavigation.toggleNavigationBtnClickEventHandler,
 );
 
 //////////////
 // For storage
 //////////////
 
-window.addEventListener("beforeunload", (e) => {
+window.addEventListener('beforeunload', (e) => {
   updateStorage();
 });

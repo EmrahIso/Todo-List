@@ -1,8 +1,8 @@
-import { TaskProjectCreator } from "./project";
+import { TaskProjectCreator } from './project.js';
 
 // import from date-fns
 
-import { formatDistanceStrict } from "date-fns";
+import { formatDistanceStrict } from 'date-fns';
 
 // Function that creates main TaskManager Object
 
@@ -32,11 +32,11 @@ function TaskManagerCreator() {
   const hasProject = (name) => {
     let returnValue = null;
 
-    if (typeof name !== "string") return returnValue;
+    if (typeof name !== 'string') return returnValue;
 
     const taskManagerKeys = Object.keys(taskManager);
     const taskManagerLowerCaseKeys = taskManagerKeys.map((key) =>
-      key.toLowerCase()
+      key.toLowerCase(),
     );
 
     taskManagerLowerCaseKeys.forEach((key) => {
@@ -92,19 +92,19 @@ function TaskManagerCreator() {
 
     tasks.forEach((task) => {
       const taskDateValue = formatDistanceStrict(
-        task.taskObj["due date"],
+        task.taskObj['due date'],
         currentDate,
-        { addSuffix: true }
+        { addSuffix: true },
       );
 
-      if (taskDateValue.split(" ")[0] === "in") {
+      if (taskDateValue.split(' ')[0] === 'in') {
         // durationValueType === hour/ hours / day / days / month / months
-        const durationValueType = taskDateValue.split(" ")[2];
+        const durationValueType = taskDateValue.split(' ')[2];
 
-        if (durationValueType == "hour" || durationValueType == "hours") {
+        if (durationValueType == 'hour' || durationValueType == 'hours') {
           weekTasks.push(task);
-        } else if (durationValueType == "day" || durationValueType == "days") {
-          const durationValue = Number(taskDateValue.split(" ")[1]);
+        } else if (durationValueType == 'day' || durationValueType == 'days') {
+          const durationValue = Number(taskDateValue.split(' ')[1]);
 
           if (durationValue < 8) weekTasks.push(task);
         }
